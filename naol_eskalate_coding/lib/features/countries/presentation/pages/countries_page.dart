@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:naol_eskalate_coding/core/constants/api.dart';
 
 import '../../../../core/animations/animated_widgets.dart';
 import '../../../../core/di/dependency_injection.dart';
@@ -56,7 +57,7 @@ class _CountriesViewState extends State<CountriesView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(231, 240, 249, 1),
+      backgroundColor: eskalateBackgroundColor,
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
         switchInCurve: Curves.easeInOut,
@@ -64,21 +65,16 @@ class _CountriesViewState extends State<CountriesView>
         transitionBuilder: (child, animation) {
           return SlideTransition(
             position: animation.drive(
-              Tween(begin: const Offset(0.3, 0), end: Offset.zero).chain(
-                CurveTween(curve: Curves.easeInOut),
-              ),
+              Tween(
+                begin: const Offset(0.3, 0),
+                end: Offset.zero,
+              ).chain(CurveTween(curve: Curves.easeInOut)),
             ),
-            child: FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
+            child: FadeTransition(opacity: animation, child: child),
           );
         },
         child: _selectedIndex == 0
-            ? Container(
-                key: const ValueKey('home'),
-                child: _buildHomeTab(),
-              )
+            ? Container(key: const ValueKey('home'), child: _buildHomeTab())
             : const FavoritesPage(),
       ),
       bottomNavigationBar: Container(
@@ -104,17 +100,18 @@ class _CountriesViewState extends State<CountriesView>
           },
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor:
-              Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+          unselectedItemColor: Theme.of(
+            context,
+          ).colorScheme.onSurface.withValues(alpha: 0.6),
           // backgroundColor: Theme.of(context).colorScheme.surface,
-          backgroundColor: Color.fromRGBO(231, 240, 249, 1),
+          backgroundColor: eskalateBackgroundColor,
           elevation: 0,
           items: [
             BottomNavigationBarItem(
               icon: AnimatedScale(
                 scale: _selectedIndex == 0 ? 1.2 : 1.0,
                 duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.home),
+                child: const Icon(Icons.home_outlined),
               ),
               label: 'Home',
             ),
@@ -122,7 +119,7 @@ class _CountriesViewState extends State<CountriesView>
               icon: AnimatedScale(
                 scale: _selectedIndex == 1 ? 1.2 : 1.0,
                 duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.favorite),
+                child: const Icon(Icons.favorite_border),
               ),
               label: 'Favorites',
             ),
@@ -194,8 +191,10 @@ class _CountriesViewState extends State<CountriesView>
           SlideInAnimation(
             delay: const Duration(milliseconds: 200),
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -205,8 +204,8 @@ class _CountriesViewState extends State<CountriesView>
                   controller: _searchController,
                   onChanged: (value) {
                     context.read<CountriesBloc>().add(
-                          SearchCountriesEvent(query: value),
-                        );
+                      SearchCountriesEvent(query: value),
+                    );
                   },
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSurface,
@@ -216,17 +215,15 @@ class _CountriesViewState extends State<CountriesView>
                     filled: true,
                     fillColor: isDark ? Colors.black : Colors.white,
                     hintStyle: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     prefixIcon: Icon(
                       Icons.search,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -246,12 +243,12 @@ class _CountriesViewState extends State<CountriesView>
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
-                context
-                    .read<CountriesBloc>()
-                    .add(const RefreshCountriesEvent());
+                context.read<CountriesBloc>().add(
+                  const RefreshCountriesEvent(),
+                );
                 await context.read<CountriesBloc>().stream.firstWhere(
-                      (state) => state is! CountriesLoading,
-                    );
+                  (state) => state is! CountriesLoading,
+                );
               },
               child: BlocBuilder<CountriesBloc, CountriesState>(
                 builder: (context, state) {
@@ -278,10 +275,9 @@ class _CountriesViewState extends State<CountriesView>
                 'Loading countries...',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
             ],
@@ -301,10 +297,9 @@ class _CountriesViewState extends State<CountriesView>
                   child: Icon(
                     Icons.search_off,
                     size: 64,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -312,10 +307,9 @@ class _CountriesViewState extends State<CountriesView>
                   'No countries found matching your search',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
               ],
@@ -385,9 +379,9 @@ class _CountriesViewState extends State<CountriesView>
                 duration: const Duration(milliseconds: 300),
                 child: ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<CountriesBloc>()
-                        .add(const RefreshCountriesEvent());
+                    context.read<CountriesBloc>().add(
+                      const RefreshCountriesEvent(),
+                    );
                   },
                   child: const Text('Retry'),
                 ),

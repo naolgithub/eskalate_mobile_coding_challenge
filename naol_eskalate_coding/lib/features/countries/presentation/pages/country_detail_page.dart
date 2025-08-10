@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:naol_eskalate_coding/core/constants/api.dart';
 import '../../../../core/animations/animated_widgets.dart';
 import '../../../../core/favorites/favorites_cubit.dart';
 import '../../domain/entity/countries_entity.dart';
@@ -17,7 +18,7 @@ class CountryDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Theme.of(context).colorScheme.surface,
-      backgroundColor: Color.fromRGBO(231, 240, 249, 1),
+      backgroundColor: eskalateBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [

@@ -68,24 +68,29 @@ class FavoritesPage extends StatelessWidget {
                           AnimatedScale(
                             scale: 1.0,
                             duration: const Duration(milliseconds: 500),
-                            child: Icon(
-                              Icons.favorite_border,
-                              size: 64,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withValues(alpha: 0.5),
-                            ),
+                            child:
+                                // Icon(
+                                //   Icons.favorite_border_sharp,
+                                //   size: 64,
+                                //   color: Theme.of(
+                                //     context,
+                                //   ).colorScheme.onSurface.withValues(alpha: 0.5),
+                                // ),
+                                Image.asset(
+                                  'assets/no_favorite.png',
+                                  width: 48,
+                                  height: 48,
+                                  fit: BoxFit.contain,
+                                ),
                           ),
                           const SizedBox(height: 16),
                           Text(
                             'No favorite countries yet.',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withValues(alpha: 0.7),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.7),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -94,10 +99,9 @@ class FavoritesPage extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withValues(alpha: 0.5),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.5),
                             ),
                           ),
                         ],
@@ -110,8 +114,10 @@ class FavoritesPage extends StatelessWidget {
                   builder: (context, countriesState) {
                     if (countriesState is CountriesAllLoaded) {
                       final favoriteCountries = countriesState.countries
-                          .where((country) => favoritesState.favoriteCountries
-                              .contains(country.name))
+                          .where(
+                            (country) => favoritesState.favoriteCountries
+                                .contains(country.name),
+                          )
                           .toList();
 
                       if (favoriteCountries.isEmpty) {
@@ -122,19 +128,16 @@ class FavoritesPage extends StatelessWidget {
                               Icon(
                                 Icons.search_off,
                                 size: 64,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurface
-                                    .withValues(alpha: 0.5),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.5),
                               ),
                               const SizedBox(height: 16),
                               Text(
                                 'Favorite countries not found',
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurface
+                                  color: Theme.of(context).colorScheme.onSurface
                                       .withValues(alpha: 0.7),
                                 ),
                               ),
@@ -143,9 +146,7 @@ class FavoritesPage extends StatelessWidget {
                                 'Try refreshing the home page',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurface
+                                  color: Theme.of(context).colorScheme.onSurface
                                       .withValues(alpha: 0.5),
                                 ),
                               ),
@@ -167,15 +168,18 @@ class FavoritesPage extends StatelessWidget {
                       // );
                       return GridView.builder(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, // 2 columns
-                          mainAxisSpacing: 12, // vertical space between items
-                          crossAxisSpacing:
-                              12, // horizontal space between items
-                          childAspectRatio: 1, // adjust height/width ratio
-                        ),
+                              crossAxisCount: 2, // 2 columns
+                              mainAxisSpacing:
+                                  12, // vertical space between items
+                              crossAxisSpacing:
+                                  12, // horizontal space between items
+                              childAspectRatio: 1, // adjust height/width ratio
+                            ),
                         itemCount: favoriteCountries.length,
                         itemBuilder: (context, index) {
                           final country = favoriteCountries[index];
@@ -187,9 +191,7 @@ class FavoritesPage extends StatelessWidget {
                       );
                     }
 
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   },
                 );
               },
@@ -208,17 +210,14 @@ class FavoritesPage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             'Clear All Favorites',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           ),
           content: Text(
             'Are you sure you want to remove all countries from your favorites?',
             style: TextStyle(
-              color: Theme.of(context)
-                  .colorScheme
-                  .onSurface
-                  .withValues(alpha: 0.8),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           actions: [

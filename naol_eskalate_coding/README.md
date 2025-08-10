@@ -30,7 +30,7 @@ A Flutter application that fetches and displays country data from the REST Count
                 <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://i.postimg.cc/yxF52m5n/Simulator-Screenshot-i-Phone-16-Pro-2025-08-10-at-16-16-15.png">
             </td>
             <td>
-               <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://i.postimg.cc/cLwPYWSm/Screenshot-2025-01-28-at-11-27-16-in-the-morning.png">
+               <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://i.postimg.cc/W1f9WYzT/Simulator-Screenshot-i-Phone-16-Pro-2025-08-10-at-16-23-35.png">
             </td>
         </tr>
     </tbody>
